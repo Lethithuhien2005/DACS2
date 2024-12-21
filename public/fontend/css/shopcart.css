@@ -1,0 +1,206 @@
+.navbar {
+    background-color: #000;
+}
+.header-shopcart{
+    margin-top: 90px;
+    margin-bottom: 30px;
+    display: flex;
+    margin-left: 30px;
+    align-items: center;
+}
+.header-shopcart i, .header-shopcart h3, .header-shopcart p {
+    color: #f1f10a;
+}
+.header-shopcart i{
+    font-size: 50px;
+    margin-right: 10px;
+}
+.header-shopcart h3 {
+    margin-top: 15px;
+    font-family: 'Rancho';
+    font-size: 50px;
+}
+.header-shopcart span {
+    height: 40px;
+    width: 1px;
+    background-color: #f1f10a;
+    margin: 10px 15px 0px 15px;
+}
+.header-shopcart p  {
+    font-size: 25px;
+    margin-top: 30px;
+}
+.table-container{
+    border-spacing: 0 10px;
+    border: 1px solid #f1f10a;
+}
+td {
+    vertical-align: middle;
+}
+.row1 {
+    background-color: #f1f10a;
+    height: 50px;
+    border-bottom: none;
+}
+th, .dish-content, .dish-category, .dish-price, .cart-quantity {
+    text-align: center;
+}
+tr:not(.end-cart) {
+    border-bottom: 1px solid #f1f10a;
+}
+.content-row:nth-child(odd) {
+    background-color: #ffffe6;
+}
+.content-row:nth-child(even) {
+    background-color: #fff;
+}
+.content-row:nth-child(odd) .input-quantity, 
+.content-row:nth-child(odd) .button-subtract,
+.content-row:nth-child(odd) .button-add,
+.content-row:nth-child(odd) .btn-delete
+{
+    background-color: #ffffe6;
+}
+.content-row:nth-child(even) .input-quantity, 
+.content-row:nth-child(even) .button-subtract,
+.content-row:nth-child(even) .button-add,
+.content-row:nth-child(even) .btn-delete {
+    background-color: #fff;
+}
+.dish-img {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+img {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: contain;
+}
+.dish-name p, .dish-category p {
+    margin-bottom: 0px;
+}
+.dish-name {
+    font-size: 20px;
+    text-transform: capitalize;
+}
+.dish-price {
+    color: #616160;
+}
+.price, .total-price {
+    font-size: 23px;
+}
+.cart-quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-subtract, .button-add {
+    border: 1px solid #000;
+    color: #000;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+.button-subtract:hover, .button-add:hover {
+   background-color: #ffff00 !important;
+}
+.input-quantity {
+    width: 40px;
+    text-align: center;
+    padding: 0px;
+    font-size: 20px;
+}
+.btn-delete {
+    border: none;
+    background-color: #fff;
+}
+.btn-delete i {
+    color: #000;
+    font-size: 25px;
+    text-align: center;
+}
+.btn-delete i:hover {
+    color: #f1f10a;
+}
+.end-cart {
+    display: flex;
+    justify-content: center;
+}
+.end-cart ul {
+    list-style: none;
+    width: 50%;
+    border: 1px solid #616160;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+.grand-price {
+    width: 100%;
+    display: flex;
+    
+}
+.total-money {
+    /* color: #f1f10a;
+    font-weight: bold; */
+}
+.money {
+    /* font-size: 30px;
+    margin-left: 10px; */
+}
+.notification {
+    justify-content: center;
+    text-align: center;
+}
+.book-now-btn {
+    background-color: #efef26;
+    color: #000;
+}
+.book-now-btn:hover {
+    background-color: #000;
+    color: #efef26;
+}
+.notification p {
+    font-size: 18px;
+    margin: 50px 0px -50px 0px;
+}
+.notification button {
+    margin-bottom: 50px;
+}
+.end-cart ul li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.end-cart ul li .total-text {
+    text-align: left;
+    flex: 1;
+}
+
+.end-cart ul li .money, .total-payment {
+    text-align: right;
+}
+.grand-price .button {
+    margin: 0px;
+}
+@media (min-width: 1200px) {
+    .row .col-sm-4.add-more button {
+        margin-top: 30px !important;
+    }
+}
+.total-payment {
+    font-weight: 700;
+    color: #efef26;
+}
+.button-group .book-now-btn{
+    margin-top: 30px;
+}
+.book-now-btn .back-btn {
+    
+}

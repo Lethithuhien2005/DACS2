@@ -1,0 +1,205 @@
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 52px;
+    background-image: url('../img/background14.jpg');
+    background-size: cover;
+}
+.container {
+    margin: 130px 0 0 0;
+    max-width: 350px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 200%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+  }
+  
+  .title {
+    font-size: 28px;
+    color: #ffff00;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+  }
+  
+  .title::before,.title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: #ffff00;
+  }
+  
+  .title::before {
+    width: 18px;
+    height: 18px;
+    background-color: #f1f10a;
+  }
+  
+  .title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+  }
+  
+  .message, .signin {
+    color: rgba(88, 87, 87, 0.822);
+    font-size: 14px;
+  }
+  
+  .signin {
+    text-align: center;
+  }
+  
+  .signin a {
+    color: #e4e408;
+  }
+  
+  .signin a:hover {
+    text-decoration: underline #f1f10a;
+  }
+  
+  .flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+  }
+  
+  .form label {
+    position: relative;
+  }
+  .row .col-sm-6 .input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.row .col-sm-6 label {
+    display: block; 
+    width: 100%;
+}
+  .input {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+  }
+  
+  .form label .input + span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+  }
+  
+  .form label .input:placeholder-shown + span {
+    top: 15px;
+    font-size: 0.9em;
+  }
+  
+  .form label .input:focus + span,.form label .input:valid + span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+  
+  .form label .input:valid + span {
+    color: rgb(224, 231, 7);
+  }
+  .input-container {
+    position: relative;
+    display: inline-block;
+}
+  #date-of-birth , #type_user {
+    position: absolute;
+    top: -10px; /* Di chuyển span lên trên */
+    left: 0;
+    font-size: 12px;
+    color: grey;
+    background-color: white; /* Tùy chỉnh màu nền nếu cần */
+    padding: 0 5px;
+  }
+  .type-user {
+    display: flex;
+  }
+  #type_user { 
+    font-size: 15px;
+    top: -20px;
+  }
+  .type-conent {
+    margin-top: 10px;
+  }
+  .input-container input:focus + #date-of-birth {
+    top: -5px;
+    font-size: 12px;
+    color: grey;
+}
+  input[type="date" i] {
+    color: grey;
+  }
+  .radio-gender {
+    display: flex;
+    color: grey;
+  }
+  .radio-gender input {
+    margin-left: 10px;
+  }
+  .gender-content {
+    margin-left: 12px;
+  }
+  .input-radio {
+    transform: scale(1.1);
+    margin: 0 5px;
+  }
+  .submit {
+    border: none;
+    outline: none;
+    background-color: #f1f10a;
+    padding: 10px;
+    border-radius: 10px;
+    color: #000;
+    font-size: 16px;
+    transform: .3s ease;
+  }
+  
+  .submit:hover {
+    background-color: rgb(231, 231, 50);
+  }
+  
+  @keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+  
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  @media (max-width: 376px) {
+    .container {
+        margin: 130px 0 0 0%;
+    }
+  }
+  @media (min-width: 377px) and (max-width: 800px) {
+    .container {
+        margin: 130px 8% 0 8%;
+    }
+  }

@@ -1,0 +1,147 @@
+.about {
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 23px;
+    font-size: 15px;
+    text-align: left;
+  }
+  div {
+    display: block;
+    unicode-bidi: isolate;
+  }
+  /* @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  } */
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .row {
+    margin-right: -20px;
+    margin-left: -20px;
+  }
+  
+  .about_img {
+    display: flex;
+    margin-left: -100px;
+    margin-top: 50px;
+  }
+  .list li {
+    width: 100%;
+    list-style: none;
+    margin-bottom: 15px;
+    font-size: 17px;
+    margin-right: 30px;
+    font-weight: 500;
+  }
+  .btn-detail {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #ffff00;
+    border-radius: 7px;
+    font-size: 15px;
+  }
+  .btn-detail:hover {
+    background-color: antiquewhite;
+    transition: all 0.4s;
+  }
+  .btn-detail a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+  }
+  .mb-4 {
+    margin-bottom: 10px;
+  }
+  .choose-us {
+    display: flex;
+    justify-content: center;
+  }
+  .choose p {
+    color: rgb(96, 107, 117);
+  }
+  .box-content {
+    margin-top: -10px;
+    padding: 20px;
+    box-shadow: 0px 0px 30px;
+    border-radius: 10px;
+    height: 100%;
+    display: flex;              
+    flex-direction: column;       /* Sắp xếp các phần tử theo chiều dọc */
+    justify-content: center; 
+    align-items: center;         
+  }
+  .box span {
+    font-size: 25px;
+  }
+  .box_fb {
+    width: 190px;
+    margin-right: 45px;
+  }
+  .img_1 {
+    margin-right: -200px;
+    z-index: -1;
+  }
+  
+  .fb_img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    padding: 8px;
+    border: 1px solid #e0e0e0e0;
+  }
+  .title_fb {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    border-bottom: 1px dashed #6d6a6ae0;
+  }
+  .box_fb p {
+    text-align: justify;
+  }
+  li .icon-plane {
+    color: #ffff00;
+  }
+ 
+  .social {
+    display: flex;
+    gap: 5px;
+  }
+  .social li a {
+    margin-right: 100px;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  img {
+    vertical-align: middle;
+    border-style: none;
+  }
+  img {
+    max-width: 100%;
+  }
+.des_title h3 {
+  margin-top: 15px;
+  
+}

@@ -1,0 +1,138 @@
+.navbar {
+    background-color: #000;
+}
+.user-container {
+    margin-bottom: 30px;
+    display: flex;
+    height: 100vh;
+}
+.left-sidebar,
+.right-container,
+.separate {
+  height: 100%;
+}
+.left-sidebar {
+    width: 20%;
+    height: 100%;
+    margin-right: -20px;
+    background: #fedd1c;
+}
+.left-sidebar {
+    padding-left: 20px;
+}
+.account-name-user, .separate, .right-header {
+    margin-top: 90px;
+}
+.bonus {
+    display: flex;
+}
+.bonus p{
+    margin: -5px 0px 0px 5px;
+}
+.link {
+    margin-top: 20px;
+}
+.link ul {
+    padding-left: 10px;
+    margin-left: -30px;
+}
+.link li {
+    list-style-type: none;
+    padding: 5px 0px 5px 20px;
+}
+.link li:hover {
+    background-color: #fff;
+}
+.link li a {
+    color: #000;
+    margin-left: 20px;
+}
+.user-information {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.right-container {
+    width: 100%;
+    padding: 0px 50px;
+}
+.input-radio {
+    width: 10%;
+}
+.col-sm-8 {
+    display: flex;
+    align-items: center;
+}
+.gender-content {
+    justify-content: flex-start;
+    margin-left: -25px;
+}
+.radio-gender {
+    margin-left: -13px;
+}
+.form-information {
+    width: 70%;
+    border: 1px solid #ffff00;
+    border-radius: 20px;
+    padding: 20px;
+}
+.col-sm-8 i {
+    color: #666;
+}
+.form-button button {
+    max-width: 150px;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+.form-button i {
+    margin-left: 5px;
+}
+.profile-container {
+    display: flex;
+}
+.user-container {
+    position: relative;
+}
+
+.profile-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: 125%; /* Đặt chiều cao của ảnh bằng chiều cao của .user-container */
+    z-index: -1; /* Đặt hình nền ở phía sau nội dung */
+    margin-right: -80px;
+}
+
+.profile-background img {
+    height: 100%; /* Đặt chiều cao ảnh bằng với .profile-background */
+    width: auto; /* Để chiều rộng tự động điều chỉnh theo tỉ lệ */
+}
+footer {
+    margin-top: -10px;
+}
+ .button-choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.notify-content p {
+    padding-top: 10px;
+}
+.dish-name p {
+    font-size: 15px;
+}
+.table-container td {
+    padding: 5px;
+}
+.btn-cancel {
+   background-color: #ffff00;
+   border: #ffff00 1px solid;
+   border-radius: 5px;
+}
+.btn-cancel:hover {
+    background-color: #000;
+    border: #ffff00 1px solid;
+    border-radius: 5px;
+    color: #ffff00;
+ }

@@ -1,0 +1,145 @@
+.title-header {
+    left: 50%;
+}
+.header-link {
+    width: 180px;
+    height: 50px;
+}
+.flatpickr-months .flatpickr-month {
+    background-color: #ffff00 !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    background-color: #ffff00 !important;
+}
+.flatpickr-weekdays {
+    background-color: #ffff00 !important;
+}
+.flatpickr-weekday {
+    background-color: #ffff00 !important;
+    color: #000 !important;
+}
+.flatpickr-calendar.arrowTop::after {
+    border-bottom-color: #ffff00 !important;
+}
+.flatpickr-calendar.arrowBottom::after {
+    border-bottom-color: #ffff00 !important;
+}
+.flatpickr-day.selected {
+    background: #ffff00;
+    border-color: #ffff00;
+}
+.title {
+    justify-content: center;
+    align-items: center;
+}
+.title h3 {
+    font-family: "Rancho", sans-serif;
+    font-size: 60px;
+}
+.reservation-container {
+    margin: 70px 5%;
+}
+.reservation-form {
+    margin-top: 30px;
+    border: 5px solid #f6f6f6;
+}
+.reservation-form p {
+    text-align: center;
+    font-size: 17px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 35px 30px 30px 30px ;
+}
+.reservation-form .hotline {
+    color: #f4f410;
+    font-weight: bolder;
+}
+.reservation-form  form {
+    margin: 0px 30px;
+}
+.reservation-form .form-content {
+    margin: 10px ;
+    justify-content: center;
+    align-self: center;
+}
+.form-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+.button {
+    max-width: 180px;
+    width: 100%;
+    --color: #000;
+    padding: 0.8em 1.7em;
+    background-color: transparent;
+    border-radius: .3em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+    font-weight: 400;
+    font-size: 17px;
+    border: 1px solid;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: var(--color);
+    z-index: 1;
+    border-color: #ffff00;
+    background-color: #ffff00;
+    margin: 50px 0px 30px 0px;
+   }
+   
+   .button::before, .button::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    background-color: var(--color);
+    transition: 1s ease;
+   }
+   
+   .button::before {
+    top: -1em;
+    left: -1em;
+   }
+   
+   .button::after {
+    left: calc(100% + 1em);
+    top: calc(100% + 1em);
+   }
+   
+   .button:hover::before, .button:hover::after {
+    height: 410px;
+    width: 410px;
+   }
+   
+   .button:hover {
+    color: #ffff00;
+    font-weight: 600;
+   }
+   
+   .button:active {
+    filter: brightness(.8);
+   }
+   
+.form-content input, select, option {
+    width: 450px;
+    height: 40px;
+    margin: 10px 0px;
+    background-color: #f6f6f6;
+    border: none;
+}
+.form-content textarea {
+    width: 94.5%;
+    margin-top: 10px;
+    height: 100px;
+    background-color: #f6f6f6;
+    border: none;
+}
