@@ -148,18 +148,48 @@
           </div>
           <h2>Best seller dishes</h2>
         </div>
-        <div class="owl-carousel owl-theme best-seller-card">
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/fried chicken.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">fried chicken</h4>
-              <div class="card-price">
-                <p>150.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
+          @if(!isset($cart_id))
+            <div class="owl-carousel owl-theme best-seller-card">
+              @foreach($best_sellers as $key => $best_dish)
+                <div class="card" onclick="location.href='{{URL::to('/detail_dish/'.$best_dish->dish_id)}}'">
+                  <form action="{{URL::to('/add-to-cart')}}" method="post">
+                    {{ csrf_field() }}
+                    <img class="card-img-top" src="{{asset('public/upload/dishes/'.$best_dish->getDish->dish_img)}}" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      <h4 class="card-title">{{$best_dish->getDish->dish_name}}</h4>
+                          <input type="hidden" name="dishid_hidden" value="{{$best_dish->dish_id}}">
+                          <input type="hidden" name="quantity" value="1">
+                      <div class="card-price">
+                        <p>{{number_format($best_dish->getDish->dish_price, 0, ',', '.')}}<span>đ</span></p>
+                        <button><i class="fa-solid fa-cart-shopping"></i></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              @endforeach
             </div>
-          </div>
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
+          @else
+          <div class="owl-carousel owl-theme best-seller-card">
+            @foreach($best_sellers as $key => $best_dish)
+              <div class="card" onclick="location.href='{{ URL::to('/detail_dish_cart_id/'.$best_dish->dish_id.'?cart_id='.$cart_id) }}'">
+                <form action="{{URL::to('/add-to-cart-res-id/'.$cart_id)}}" method="post">
+                  {{ csrf_field() }}
+                  <img class="card-img-top" src="{{asset('public/upload/dishes/'.$best_dish->getDish->dish_img)}}" alt="Card image" style="width:100%">
+                  <div class="card-body">
+                    <h4 class="card-title">{{$best_dish->getDish->dish_name}}</h4>
+                          <input type="hidden" name="dishid_hidden" value="{{$best_dish->dish_id}}">
+                          <input type="hidden" name="quantity" value="1">
+                    <div class="card-price">
+                      <p>{{number_format($best_dish->getDish->dish_price, 0, ',', '.')}}<span>đ</span></p>
+                      <button><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            @endforeach
+           </div>
+          @endif
+          <!-- <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
             <img class="card-img-top" src="{{asset('public/fontend/img/spaghetti bolognese.jpg')}}" alt="Card image" style="width:100%">
             <div class="card-body">
               <h4 class="card-title">spaghetti bolognese</h4>
@@ -218,8 +248,8 @@
                 <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
      </div>
     <!-- Discount -->
      <div class="discount-container" data-aos="fade-right">

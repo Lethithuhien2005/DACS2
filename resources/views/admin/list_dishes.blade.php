@@ -16,6 +16,14 @@
       align-items: center;       /* Căn giữa dọc */
       gap: 5px;        
     }
+    nav {
+      text-align: right;
+      margin: 10px 10px 0px 0px;
+    }
+    .page-link{
+      font-size: 13px;
+      padding: 4px 10px;
+    }
   </style>
 @endsection
 @section('admin_content')
@@ -58,7 +66,7 @@
             <th style="width:30px;">Price</th>
             <th style="width:50px;">Image</th>
             <th style="width:250px;">Desciption</th>
-            <th style="width:30px;">Catogory</th>
+            <th style="width:30px;">Category</th>
             <th style="width:100px;">Status</th>
             <th style="width:100px;">Date added</th>
             <th style="width:30px;"></th>
@@ -94,117 +102,7 @@
         </tbody>
       </table>
     </div>
-    <footer class="panel-footer">
-      <div class="row">
-        
-        <div class="col-sm-5 text-center">
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            <!-- @foreach ($list_dishes->getUrlRange(1, $list_dishes->lastPage()) as $page => $url)
-            <li class="page-item {{ ($page == $list_dishes->currentPage()) ? 'active' : '' }}">
-              <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-            </li>
-          @endforeach -->
-
-          <!-- {{ $list_dishes->links() }} -->
-
-          <!-- Mũi tên "Previous" -->
-        @if ($list_dishes->onFirstPage())
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-left"></i></span>
-          </li>
-        @else
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_dishes->previousPageUrl() }}"><i class="fa fa-chevron-left"></i></a>
-          </li>
-        @endif
-
-        <!-- Hiển thị các số trang -->
-        @php
-          $currentPage = $list_dishes->currentPage();
-          $lastPage = $list_dishes->lastPage();
-          $range = 5;
-          $start = max(1, $currentPage - $range);
-          $end = min($lastPage, $currentPage + $range);
-        @endphp
-
-        @if ($currentPage > 1 && $currentPage - $range > 1)
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_dishes->url(1) }}">1</a>
-          </li>
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-        @endif
-
-        @for ($page = $start; $page <= $end; $page++)
-          @if ($page == $currentPage)
-            <li class="page-item active">
-              <span class="page-link">{{ $page }}</span>
-            </li>
-          @else
-            <li class="page-item">
-              <a class="page-link" href="{{ $list_dishes->url($page) }}">{{ $page }}</a>
-            </li>
-          @endif
-        @endfor
-
-        @if ($currentPage < $lastPage && $currentPage + $range < $lastPage)
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_dishes->url($lastPage) }}">{{ $lastPage }}</a>
-          </li>
-        @endif
-
-        <!-- Mũi tên "Next" -->
-        @if ($list_dishes->hasMorePages())
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_dishes->nextPageUrl() }}"><i class="fa fa-chevron-right"></i></a>
-          </li>
-        @else
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-right"></i></span>
-          </li>
-        @endif
-        
-        <!-- @if ($list_dishes->onFirstPage())
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-left"></i></span>
-          </li>
-        @else
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_dishes->previousPageUrl() }}"><i class="fa fa-chevron-left"></i></a>
-          </li>
-        @endif -->
-
-        <!-- Hiển thị trang 1 và 2 -->
-        <!-- <li class="page-item @if($list_dishes->currentPage() == 1) active @endif">
-          <a class="page-link" href="{{ $list_dishes->url(1) }}">1</a>
-        </li>
-        @if ($list_dishes->lastPage() > 2)
-          <li class="page-item @if($list_dishes->currentPage() == 2) active @endif">
-            <a class="page-link" href="{{ $list_dishes->url(2) }}">2</a>
-          </li>
-        @endif -->
-
-        <!-- Nếu có nhiều hơn 2 trang, hiển thị dấu mũi tên "..." -->
-        <!-- @if ($list_dishes->lastPage() > 2)
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-        @endif -->
-
-        <!-- Mũi tên "Next" -->
-        <!-- @if ($list_dishes->hasMorePages())
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_dishes->nextPageUrl() }}"><i class="fa fa-chevron-right"></i></a>
-          </li>
-        @else
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-right"></i></span>
-          </li>
-        @endif -->
-          </ul>
-        </div>
-      </div>
-    </footer>
+    {{$list_dishes->links()}}
   </div>
 </div>
 @endsection

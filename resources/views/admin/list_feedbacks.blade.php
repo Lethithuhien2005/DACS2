@@ -8,6 +8,14 @@
     th, .short-content {
       text-align:center;
     }
+    nav {
+      text-align: right;
+      margin: 10px 10px 0px 0px;
+    }
+    .page-link{
+      font-size: 13px;
+      padding: 4px 10px;
+    }
   </style>
 @endsection
 @section('admin_content')
@@ -92,6 +100,7 @@
         </tbody>
       </table>
     </div>
+    {{$list_feedbacks->links()}}
   </div>
 </div>
 @endsection

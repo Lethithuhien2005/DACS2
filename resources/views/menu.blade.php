@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 @endsection
 @section('content')
+
         <?php
           $cart_id = Session::get('cart_id');
         ?>
@@ -74,7 +75,7 @@
                               $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star-half-stroke rating-star"></i>';
                           }
                           elseif (3.7 <= $avg_rating) {
-                              $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star"></i>';
+                              $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star rating-star"></i>';
                           }
                           elseif (3.3 <= $avg_rating) {
                               $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star-half-stroke rating-star"></i> <i class="fa-regular fa-star rating-star"></i>';
@@ -115,8 +116,8 @@
                   </form>
                 </div>
                 @else
-                  <div class="col-sm-4 card card-dish" onclick="location.href='{{ URL::to('/detail_dish_cart_id/'.$dish->dish_id.'?cart_id='.$cart_id) }}'">
-                    <form action="{{URL::to('/add-to-cart-res-id/'.$cart_id)}}" method="post">
+                  <div class="col-sm-4 card card-dish" onclick="location.href='{{ URL::to('/detail_dish_cart_id/'.$dish->dish_id.'?cart_id='.$cart_id . '&type_name=' . $type_user) }}'">
+                    <form action="{{URL::to('/add-to-cart-res-id/'.$cart_id . '?type_name='.$type_user)}}" method="post">
                     {{ csrf_field() }}
                     <img class="card-img-top" src="{{asset('public/upload/dishes/'.$dish->dish_img)}}" alt="Card image" style="width:100%">
                       <div class="card-body">
@@ -139,7 +140,7 @@
                                     $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star-half-stroke rating-star"></i>';
                                 }
                                 elseif (3.7 <= $avg_rating) {
-                                    $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star"></i>';
+                                    $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star rating-star"></i>';
                                 }
                                 elseif (3.3 <= $avg_rating) {
                                     $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star-half-stroke rating-star"></i> <i class="fa-regular fa-star rating-star"></i>';

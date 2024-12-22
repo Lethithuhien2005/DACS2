@@ -37,21 +37,21 @@
               <input type="hidden" name="user_id" value="{{ $user_id }}">
               <div class="col-sm-6">
                 <i class="fa-solid fa-user"></i>
-                <input class="form-tag" type="text" placeholder="Your name" name="name" required="">
+                <input class="form-tag" type="text" placeholder="Your name" name="name" required="" value="{{ old('name', session('reservation_data.name')) }}">
               </div>
               <div class="col-sm-6">
                 <i class="fa-solid fa-envelope"></i>
-                <input class="form-tag" type="text" placeholder="Email" name="email" required="">
+                <input class="form-tag" type="text" placeholder="Email" name="email" required="" value="{{ old('email', session('reservation_data.email')) }}">
               </div>
             </div>
             <div class="row form-content">
               <div class="col-sm-6">
                 <i class="fa-solid fa-phone"></i>
-                <input class="form-tag" type="text" placeholder="Phone" name="phone" required="">
+                <input class="form-tag" type="text" placeholder="Phone" name="phone" required="" value="{{ old('phone', session('reservation_data.phone')) }}">
               </div>
               <div class="col-sm-6">
                 <i class="fa-solid fa-user-group"></i>
-                <select type="text" class="form-tag" name="number_of_people">
+                <select type="text" class="form-tag" name="number_of_people" value="{{ old('number_of_people', session('reservation_data.number_of_people')) }}">
                   <option>1 Person</option>
                   <option>2 People</option>
                   <option>3 People</option>
@@ -70,11 +70,11 @@
             <div class="row form-content">
               <div class="col-sm-6">
                 <i class="fa-solid fa-calendar-days"></i>
-                <input id="date" class="form-tag" type="date" placeholder="Date" name="book_date" required="">
+                <input id="date" class="form-tag" type="date" placeholder="Date" name="book_date" required="" value="{{ old('res_date', session('reservation_data.book_date')) }}">
               </div>
               <div class="col-sm-6">
                 <i class="fa-solid fa-clock"></i>
-                <select type="text" class="form-tag" name = "book_time">
+                <select type="text" class="form-tag" name = "book_time" value="{{ old('res_time', session('reservation_data.book_time')) }}">
                   <option>7:00</option>
                   <option>8:00</option>
                   <option>9:00</option>
@@ -96,7 +96,7 @@
               </div>
             </div>
             <div class="row form-content">
-             <textarea name="" id="" placeholder="Your note" name="note"></textarea>
+             <textarea name="" id="" placeholder="Your note" name="note" value="{{ old('note', session('reservation_data.note')) }}"></textarea>
             </div>
             <input type="hidden" name="reservation_status" value="not yet arrived">
             <div class="row form-button">

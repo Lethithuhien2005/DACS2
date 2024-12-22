@@ -43,7 +43,7 @@
                                     $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star-half-stroke rating-star"></i>';
                                 }
                                 elseif (3.7 <= $avg_rating) {
-                                    $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star"></i>';
+                                    $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star rating-star"></i>';
                                 }
                                 elseif (3.3 <= $avg_rating) {
                                     $rating_star  = '<i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-solid fa-star rating-star"></i> <i class="fa-regular fa-star-half-stroke rating-star"></i> <i class="fa-regular fa-star rating-star"></i>';
@@ -152,16 +152,16 @@
                                                 $rating = $item->getFeedback->rating;
                                                 switch($rating) {
                                                     case 1: 
-                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item">';
+                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"></i>';
                                                       break;
                                                     case 2:
-                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item">';
+                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"></i>';
                                                       break;
                                                     case 3:
-                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item">';
+                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"> <i class="fa-regular fa-star rating-star-item"></i>';
                                                       break;
                                                     case 4: 
-                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item">';
+                                                      $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-regular fa-star rating-star-item"></i>';
                                                       break;
                                                     case 5:
                                                       $rating_star = '<i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i> <i class="fa-solid fa-star rating-star-item"></i>';
@@ -183,12 +183,12 @@
                         </div> 
                     @endif
                 </div>
-                @if($order_item != null)
+                @if(isset($order_item))
                 <div class="row form-review">
                     <div class="col-sm-12">
                         <p class="form-top"><b>Write your review</b></p>
                     </div>
-                    <form action="{{URL::to('/send-feedback/'.$order_item->order_item_id)}}" method="POST">
+                    <form action="{{URL::to('/send-feedback/'.$order_item->order_item_id .'?type_name='.$type_user)}}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-sm-12 form-box">

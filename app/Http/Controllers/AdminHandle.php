@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Models\User;
+use App\Models\OrderItem;
 use App\Http\Controllers\MailHandler;
 use Illuminate\Support\Facades\Redirect;
 
@@ -13,11 +14,13 @@ session_start();
 
 class AdminHandle extends Controller
 {
-    public function showDashboard() {
-        return view('admin.dashboard');
+    public function showDashboard($type_user) {
+        $best_sellers = OrderItem::select('dish_id', DB::raw('SUM(quantity) as total_quantity'))
+        ->groupBy('dish_id')->orderBy('total_quantity', 'desc')->take(7)->get();
+        return view('admin.dashboard')->with($type_user)->with('best_sellers', $best_sellers);
     }
     public function show_list_user() {
-       $list_user = User::with('get_type')->paginate(10);
+       $list_user = User::with('get_type')->paginate(5);
        return view('admin.list_users')->with('list_user', $list_user);
     }
     public function add_user(){
@@ -76,6 +79,7 @@ class AdminHandle extends Controller
                 $user->email = $request->email;
                 $user->save();
                 Session::put('message', "Updated information successfully!");
+                $this->mailHandler->sendUpdatingAccount($user);
                 return Redirect::to('/edit-user/'.$user_id);
             }
         }

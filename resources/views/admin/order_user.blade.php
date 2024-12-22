@@ -28,7 +28,7 @@
     <section class="container">
         <table class="table-container">
             <thead>
-            @if($type_user == 1)
+            @if($type_user == "customer")
                 <tr class="row1">
                     <th colspan="2" width="40%">Dish</td>
                     <th width="20%">Price</th>
@@ -47,7 +47,7 @@
             </thead>
             <tbody>
                     @foreach($order_items as $key => $order_item)
-                        <tr class="content-row" onclick="location.href='{{ URL::to('/detail_dish/' . $order_item->dish_id )}}'">
+                        <tr class="content-row">
                             <td width="10%">
                                 <div class="dish-img">
                                     <img src="{{asset('public/upload/dishes/'.$order_item->order_item_img)}}" alt="">
@@ -74,12 +74,12 @@
                                     ?>
                                 </span><span>đ</span>
                             </td>
-                            @if($type_user == 1)
-                            @if(isset($order_item->getFeedback))
+                            @if($type_user == "customer")
+                                    @if(isset($order_item->getFeedback))
                                         <td><p>Evaluated <i class="fa-solid fa-check"></i></p></td>
                                     @else 
                                         <td>
-                                            <button class="btn-cancel" onclick="location.href='{{ URL::to('/detail_dish/' . $order_item->dish_id . '?order_item_id=' . $order_item->order_item_id) }}'">
+                                            <button class="btn-cancel" onclick="location.href='{{ URL::to('/detail_dish/' .$order_item->dish_id . '?order_item_id=' . $order_item->order_item_id . '&type_name='.$type_user) }}'">
                                                 Evaluate
                                             </button>
                                         </td>
@@ -93,10 +93,10 @@
         <div class="row">
             <div class="col-sm-8"></div>
             <div class="col-sm-4 add-more" >
-                @if($type_user == 1)
+                @if($type_user == "customer")
                 <button class="book-now-btn" onclick="location.href='{{URL::to('/my-reservation/'. $order->user_id)}}'"><i class="fa-solid fa-arrow-left"></i>Back</button>
-                @elseif($type_user == 2 || $type_user == 3)
-                <button class="book-now-btn" onclick="location.href='{{URL::to('/list-of-orders/')}}'"><i class="fa-solid fa-arrow-left"></i>Back</button>
+                @elseif($type_user == "administrator" || $type_user == "manager" || $type_user == "staff")
+                <button class="book-now-btn" onclick="location.href='{{URL::to('/list-of-orders/'. $type_user)}}'"><i class="fa-solid fa-arrow-left"></i>Back</button>
                 @endif
             </div>
         </div>

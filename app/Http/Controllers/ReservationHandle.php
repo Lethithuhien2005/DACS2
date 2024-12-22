@@ -11,9 +11,11 @@ use Surfsidemedia\Shoppingcart\Facades\Cart as ShoppingCart;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
 use App\Models\Dish;
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use App\Http\Controllers\MailHandler;
 session_start();
 
 class ReservationHandle extends Controller
@@ -21,10 +23,15 @@ class ReservationHandle extends Controller
     public function showReservation(){
         return view('reservation');
     }
+    public function __construct(MailHandler $mailHandler) {
+        $this->mailHandler = $mailHandler;
+    }
     public function save_reservation(Request $request) {
         // Check login: 
         $user_id = $request->user_id;
         if(!session::has('user_id')) {
+            //save inputed content before redirecting to login page
+            session(['reservation_data' => $request->only(['name', 'email', 'phone', 'book_date', 'book_time', 'number_of_people', 'note'])]);
             // save current url
             session(['url.intended' => url()->previous()]);
             return Redirect::to('/login');
@@ -40,9 +47,10 @@ class ReservationHandle extends Controller
                 'res_status' => $request->reservation_status,
                 'user_id' => $request->user_id,
             ]);
-            Session::put('reservation_id', $reservation->res_id);
-            $res_id =  Session::get('reservation_id');
-            
+            // Session::put('reservation_id', $reservation->res_id);
+            // $res_id =  Session::get('reservation_id');
+            $res_id = $reservation->res_id;
+            $user = User::find($reservation->user_id);
             //Create a cart in database
             $cart = CartModel::create([
                 'res_id' => $res_id,
@@ -67,6 +75,7 @@ class ReservationHandle extends Controller
             ShoppingCart::destroy();
             Session::put('message_reservation', 'Your reservation was successful!');
             // return Redirect::to('/reservation');
+            $this->mailHandler->sendReservation($reservation, $user);
             return redirect()->intended('/reservation');  
         }
     }
@@ -112,6 +121,27 @@ class ReservationHandle extends Controller
         Session::put('message', 'The customer has completed the meal');
         return Redirect::to('/list-of-reservations/'. $type_user);
     }
+    public function edit_reservation($res_id) {
+        $reservation_editing = Reservation::find($res_id);
+        return view('admin.edit_reservation')->with('reservation_editing', $reservation_editing);
+    }
+    public function update_reservation($res_id, Request $request) {
+        $reservation = Reservation::find($res_id);
+        $reservation->name = $request->name;
+        $reservation->email = $request->email;
+        $reservation->phone = $request->phone;
+        $reservation->res_date = $request->reservation_date;
+        $reservation->res_time = $request->time;
+        $reservation->number_of_people = $request->number_of_people;       
+        $reservation->note = $request->note;
+        $reservation->save();
+        $user = User::find($reservation->user_id);
+        $type_user = ["administrator", "manager", "staff"];
+        Session::put('message', 'Updated reservation successfully!');
+        $this->mailHandler->sendUpdatingReservation($reservation, $user);
+        return view('admin.list_reservation')->with('type_user', $type_user);
+
+    }
     public function show_status_cancel($res_id, Request $request) {
         $type_user = $request->query('type_name');
         $reservation = Reservation::find($res_id);
@@ -130,9 +160,11 @@ class ReservationHandle extends Controller
         $type_user = $request->query('type_name');
         $cart = CartModel::find($cart_id);
         $cart_items = CartItem::where('cart_id',$cart_id)->get();
+        //get status if revservating is canceled
+        $reservation_status = $cart->get_reservation->res_status;
         //Send cart_id if customer has no items in their cart
         Session::put('cart_id', $cart->cart_id);
-        return view('user.shopcart_user')->with('cart_items', $cart_items)->with('type_user', $type_user)->with('cart', $cart);
+        return view('user.shopcart_user')->with('cart_items', $cart_items)->with('type_user', $type_user)->with('cart', $cart)->with('reservation_status', $reservation_status);
     }
     public function add_to_cart_res_id(Request $request, $cart_id) {
         $dish_id = $request->dishid_hidden;
@@ -147,7 +179,8 @@ class ReservationHandle extends Controller
             'cart_id' => $cart_id,
             'dish_id' => $dish->dish_id,  
         ]);
-        return Redirect::to("/cart-items/$cart_id");
+        $type_user = $request->type_name;
+        return Redirect::to("/cart-items/$cart_id?type_user=".$type_user)->with('type_user', $type_user);
     }
     public function delete_cart_item(Request $request, $cart_id) {
         dd($request->cart_item_id);

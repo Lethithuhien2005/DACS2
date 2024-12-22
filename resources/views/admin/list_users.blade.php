@@ -1,11 +1,19 @@
 @extends('admin.admin_layout')
 @section('style')
   <style>
-    th {
+    th, td {
       text-align:center;
     }
     .message {
       color: #3366cc;
+    }
+    nav {
+      text-align: right;
+      margin: 10px 10px 0px 0px;
+    }
+    .page-link{
+      font-size: 13px;
+      padding: 4px 10px;
     }
   </style>
 @endsection
@@ -76,72 +84,7 @@
         </tbody>
       </table>
     </div>
-    <footer class="panel-footer">
-      <div class="row">       
-        <div class="col-sm-5 text-center">
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-             <!-- Mũi tên "Previous" -->
-        @if ($list_user->onFirstPage())
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-left"></i></span>
-          </li>
-        @else
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_user->previousPageUrl() }}"><i class="fa fa-chevron-left"></i></a>
-          </li>
-        @endif
-
-        <!-- Hiển thị các số trang -->
-        @php
-          $currentPage = $list_user->currentPage();
-          $lastPage = $list_user->lastPage();
-          $range = 5;
-          $start = max(1, $currentPage - $range);
-          $end = min($lastPage, $currentPage + $range);
-        @endphp
-
-        @if ($currentPage > 1 && $currentPage - $range > 1)
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_user->url(1) }}">1</a>
-          </li>
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-        @endif
-
-        @for ($page = $start; $page <= $end; $page++)
-          @if ($page == $currentPage)
-            <li class="page-item active">
-              <span class="page-link">{{ $page }}</span>
-            </li>
-          @else
-            <li class="page-item">
-              <a class="page-link" href="{{ $list_user->url($page) }}">{{ $page }}</a>
-            </li>
-          @endif
-        @endfor
-
-        @if ($currentPage < $lastPage && $currentPage + $range < $lastPage)
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_user->url($lastPage) }}">{{ $lastPage }}</a>
-          </li>
-        @endif
-
-        <!-- Mũi tên "Next" -->
-        @if ($list_user->hasMorePages())
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_user->nextPageUrl() }}"><i class="fa fa-chevron-right"></i></a>
-          </li>
-        @else
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-right"></i></span>
-          </li>
-        @endif
-          </ul>
-        </div>
-      </div>
-    </footer>
+    {{$list_user->links()}}
   </div>
 </div>
 @endsection

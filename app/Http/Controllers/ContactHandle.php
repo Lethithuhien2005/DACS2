@@ -33,7 +33,7 @@ class ContactHandle extends Controller
         }
     }
     public function show_list_contact() {
-        $list_contacts = Contact::all()->paginate(7);
+        $list_contacts = Contact::paginate(7);
         return view('admin.list_contacts')->with('list_contacts', $list_contacts);
     }
 }

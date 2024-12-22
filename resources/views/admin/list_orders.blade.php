@@ -15,6 +15,14 @@
     th, .short-content {
       text-align: center;
     }
+    nav {
+      text-align: right;
+      margin: 10px 10px 0px 0px;
+    }
+    .page-link{
+      font-size: 13px;
+      padding: 4px 10px;
+    }
   </style>
 @endsection
 @section('admin_content')
@@ -76,7 +84,7 @@
             <td class="short-content">{{ $order->getReservation->res_time }}</td>
             <td class="short-content">{{ $order->getReservation->number_of_people }}</td>
             <td class="short-content">
-              <a href="{{URL::to('/order-items/'.$order->order_id)}}"><i class="fa-solid fa-cart-shopping"></i></a></td>
+              <a href="{{URL::to('/order-items/'.$order->order_id . '?type_name='.$type_user)}}"><i class="fa-solid fa-cart-shopping"></i></a></td>
             <td>{{ number_format($order->total_payment, 0, ',', '.') }}<span>đ</span></td>
             <td class="short-content"><span class="text-ellipsis status_container">
                     @if($order->order_status == "unpaid" )
@@ -91,72 +99,7 @@
         </tbody>
       </table>
     </div>
-    <footer class="panel-footer">
-      <div class="row">
-        <div class="col-sm-5 text-center">
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            <!-- Mũi tên "Previous" -->
-        @if ($list_orders->onFirstPage())
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-left"></i></span>
-          </li>
-        @else
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_orders->previousPageUrl() }}"><i class="fa fa-chevron-left"></i></a>
-          </li>
-        @endif
-
-        <!-- Hiển thị các số trang -->
-        @php
-          $currentPage = $list_orders->currentPage();
-          $lastPage = $list_orders->lastPage();
-          $range = 5;
-          $start = max(1, $currentPage - $range);
-          $end = min($lastPage, $currentPage + $range);
-        @endphp
-
-        @if ($currentPage > 1 && $currentPage - $range > 1)
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_orders->url(1) }}">1</a>
-          </li>
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-        @endif
-
-        @for ($page = $start; $page <= $end; $page++)
-          @if ($page == $currentPage)
-            <li class="page-item active">
-              <span class="page-link">{{ $page }}</span>
-            </li>
-          @else
-            <li class="page-item">
-              <a class="page-link" href="{{ $list_orders->url($page) }}">{{ $page }}</a>
-            </li>
-          @endif
-        @endfor
-
-        @if ($currentPage < $lastPage && $currentPage + $range < $lastPage)
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_orders->url($lastPage) }}">{{ $lastPage }}</a>
-          </li>
-        @endif
-
-        <!-- Mũi tên "Next" -->
-        @if ($list_orders->hasMorePages())
-          <li class="page-item">
-            <a class="page-link" href="{{ $list_orders->nextPageUrl() }}"><i class="fa fa-chevron-right"></i></a>
-          </li>
-        @else
-          <li class="page-item disabled">
-            <span class="page-link"><i class="fa fa-chevron-right"></i></span>
-          </li>
-        @endif
-          </ul>
-        </div>
-      </div>
-    </footer>
+    {{$list_orders->links()}}
   </div>
 </div>
 @endsection

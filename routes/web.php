@@ -25,7 +25,10 @@ Route::get('/completed/{res_id}', [ReservationHandle::class, 'show_status_comple
 Route::get('/cart-items/{cart_id}', [ReservationHandle::class, 'show_cart_user']);
 Route::post('/add-to-cart-res-id/{cart_id}', [ReservationHandle::class, 'add_to_cart_res_id']);
 Route::get('/delete_item_cart_res_id/{cart_id}', [ReservationHandle::class, 'delete_cart_item']);
+Route::get('/delete_item_cart_res_id/{cart_id}', [ReservationHandle::class, 'delete_cart_item']);
 Route::get('/my-reservation/{user_id}', [ReservationHandle::class, 'show_my_reservation']);
+Route::get('/edit-reservation/{res_id}', [ReservationHandle::class, 'edit_reservation']);
+Route::post('/update_reservation/{res_id}', [ReservationHandle::class, 'update_reservation']);
 Route::get('/cancel-reservation/{res_id}', [ReservationHandle::class, 'show_status_cancel']);
 
 
@@ -40,7 +43,7 @@ Route::get('/profile/{user_id}', [UserHandle::class, 'showProfile']);
 Route::post('/update-user-information/{user_id}', [UserHandle::class, 'update_user']);
 
 use App\Http\Controllers\AdminHandle;
-Route::get('/dashboard', [AdminHandle::class, 'showDashboard']);
+Route::get('/dashboard/{type_user}', [AdminHandle::class, 'showDashboard']);
 Route::get('/list-of-users', [AdminHandle::class, 'show_list_user']);
 Route::get('/add-user', [AdminHandle::class, 'add_user']);
 Route::post('/save-user', [AdminHandle::class, 'save_user']);
@@ -77,7 +80,7 @@ Route::post('/update-price-cartmodel', [CartHandle::class, 'update_cartmodel']);
 Route::get('/delete_item_shoppingcart', [CartHandle::class, 'delete_item_shoppingcart']);
 
 use App\Http\Controllers\OrderHandle;
-Route::get('list-of-orders', [OrderHandle::class, 'show_list_order']);
+Route::get('list-of-orders/{type_user}', [OrderHandle::class, 'show_list_order']);
 Route::get('/order-items/{order_id}', [OrderHandle::class, 'show_order_item']);
 Route::get('/paid/{order_id}', [OrderHandle::class, 'convert_to_paid']);
 Route::get('/unpaid/{order_id}', [OrderHandle::class, 'convert_to_unpaid']);

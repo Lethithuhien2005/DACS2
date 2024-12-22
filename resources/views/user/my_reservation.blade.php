@@ -73,7 +73,7 @@
                                         <td class="dish-content">
                                             <div class="dish-category">
                                                 @if($reservation->res_status == 'meal completed')
-                                            <a href="{{URL::to('/order-items/'.$reservation->hasOrder->order_id . '?user_id='. $reservation->user_id)}}"><i class="fa-solid fa-cart-shopping"></i></a>
+                                            <a href="{{URL::to('/order-items/'.$reservation->hasOrder->order_id . '?type_name=customer')}}"><i class="fa-solid fa-cart-shopping"></i></a>
                                                 @else
                                             <a href="{{URL::to('/cart-items/'.$reservation->hasCart->cart_id . '?type_name=customer')}}"><i class="fa-solid fa-cart-shopping"></i></a>
                                                 @endif

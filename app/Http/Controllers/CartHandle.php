@@ -95,10 +95,4 @@ class CartHandle extends Controller
             'dishCount' => $dishCount
         ]);
     }
-    // public function delete_item_cartmodel(Request $request) {
-    //     $cart_item_id = $request->cart_item_id;
-    //     $cart_item = CartItem::find($cart_item_id);
-    //     $cart_item->delete();
-    //     return
-    // }
 }

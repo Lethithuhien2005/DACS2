@@ -15,16 +15,15 @@ use Illuminate\Http\Request;
 class FeedbackHandle extends Controller
 {
     public function show_list_feedback() {
-        $list_feedbacks = Feedback::all();
+        $list_feedbacks = Feedback::paginate(10);
         return view('admin.list_feedbacks')->with('list_feedbacks', $list_feedbacks);
     }
     public function send_feedback($order_item_id, Request $request) {
         $order_item = OrderItem::find($order_item_id);
         $order_id = $order_item->order_id;
+        $type_user = $request->type_name;
         $order = Order::find($order_id);
-        $user_id = $order->user_id; 
-        $user = User::find($user_id);
-        $type_user = $user->type_id;
+        $user_id = $order->user_id;
         $data = Feedback::create([
             'user_id' => $user_id,
             'order_item_id' => $order_item_id,

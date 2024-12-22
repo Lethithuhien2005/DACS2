@@ -98,6 +98,7 @@ class DishHandle extends Controller
     public function show_detail_dish($dish_id, Request $request) {
         $order_item_id = $request->order_item_id;
         $order_item = OrderItem::find($order_item_id);
+        $type_user = $request->type_name;
         //get order_items to display feedbacks of that dish
         $list_order_item = OrderItem::where('dish_id', $dish_id)->get();
         //get catogory to display relative dishes
@@ -105,7 +106,7 @@ class DishHandle extends Controller
         $detail_dish = Dish::with('get_category')->find($dish_id);
         $category_dish = $detail_dish->category_id;
         $related_dish = Dish::with('get_category')->where('category_id', $category_dish)->where('dish_id', '!=', $dish_id)->get();
-        return view('detail_dish')->with('category_dish', $category_dish)->with('detail_dish', $detail_dish)->with('list_orderItem', $list_order_item)->with('related_dish',$related_dish)->with('order_item', $order_item);
+        return view('detail_dish')->with('category_dish', $category_dish)->with('detail_dish', $detail_dish)->with('list_orderItem', $list_order_item)->with('related_dish',$related_dish)->with('order_item', $order_item)->with('type_user', $type_user);
    }
    public function show_detail_dish_cart_id($dish_id, Request $request) {
         $cart_id = $request->query('cart_id');

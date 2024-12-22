@@ -55,7 +55,7 @@ class UserHandle extends Controller
         $password = $request->password;
         $result = User::where('email', $email)->first();
         if($result) {
-            $type_user = $result->type_id;
+            $type_user = $result->get_type->type_name;
             $check_password = Hash::check($password, $result->password);
             if($check_password) {
                 Session::put('account_name', $result->account_name);
@@ -65,10 +65,10 @@ class UserHandle extends Controller
                 $result->remember_token = $remember_token;
                 $result->save();
                 cookie()->queue('remember_token', $remember_token, 60*24*7);
-                if($type_user == 1) {
+                if($type_user == "customer") {
                     return redirect()->intended('/homepage');
                 } else {
-                    return Redirect::to('/dashboard');
+                    return Redirect::to('/dashboard/'.$type_user);
                 }
             } else {
                 Session::put('message', "Your password is invalid");
@@ -129,6 +129,7 @@ class UserHandle extends Controller
                 $user->email = $request->email;
                 $user->save();
                 Session::put('message', "Updated your information successfully!");
+                $this->mailHandler->sendUpdatingAccount($user);
                 return Redirect::to("/profile/$user_id");
             }
         }

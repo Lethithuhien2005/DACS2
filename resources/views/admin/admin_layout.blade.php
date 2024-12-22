@@ -31,14 +31,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     @yield('style')
 </head>
 <body>
+    <?php
+        $type_user = Session::get('type_user');
+    ?>
 <section id="container">
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
-        ADMIN
-    </a>
+        @if($type_user == "administrator")
+            <a href="" class="logo">
+                ADMIN
+            </a>
+        @elseif($type_user == "staff")
+            <a href="" class="logo">
+                STAFF
+            </a>
+        @else
+            <a href="" class="logo">
+                MANAGER
+            </a>
+        @endif
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
     </div>
@@ -55,7 +68,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <?php
                         $user_id = Session::get('user_id');
                         $name = Session::get('account_name');
-                        $type_user = Session::get('type_user');
                         if($name) {
                             echo $name;
                         }
@@ -82,32 +94,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="{{URL::to('/dashboard')}}">
+                    <a class="active" href="{{URL::to('/dashboard/'.$type_user)}}">
                         <i class="fa fa-dashboard"></i>
                         <span>Overview</span>
                     </a>
                 </li>
-                
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-book"></i>
-                        <span>Category</span>
-                    </a>
-                    <ul class="sub">
-						<li><a href="{{URL::to('add-category')}}">Add Category</a></li>
-						<li><a href="{{URL::to('list-of-category')}}">List Categories</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-book"></i>
-                        <span>Dish</span>
-                    </a>
-                    <ul class="sub">
-						<li><a href="{{URL::to('add-dish')}}">Add Dish</a></li>
-						<li><a href="{{URL::to('list-of-dishes')}}">List Dishes</a></li>
-                    </ul>
-                </li>
+                @if($type_user == "administrator" || $type_user == "manager") 
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Category</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('add-category')}}">Add Category</a></li>
+                            <li><a href="{{URL::to('list-of-category')}}">List Categories</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Dish</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('add-dish')}}">Add Dish</a></li>
+                            <li><a href="{{URL::to('list-of-dishes')}}">List Dishes</a></li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
@@ -124,9 +137,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Order</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('list-of-orders')}}">List Orders</a></li>
+						<li><a href="{{URL::to('list-of-orders/'.$type_user)}}">List Orders</a></li>
                     </ul>
-                </li><li class="sub-menu">
+                </li>
+                @if($type_user == "administrator" || $type_user == "manager") 
+                <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
                         <span>Feeback</span>
@@ -143,6 +158,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="{{URL::to('list-of-contacts')}}">List Contacts</a></li>
                     </ul>
                 </li>
+                @endif
+                @if($type_user == "administrator") 
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
@@ -153,6 +170,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="{{URL::to('list-of-users')}}">List Users</a></li>
                     </ul>
                 </li>
+                @endif
             </ul>           
          </div>
         <!-- sidebar menu end-->
