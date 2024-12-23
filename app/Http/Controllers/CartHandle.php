@@ -53,7 +53,6 @@ class CartHandle extends Controller
             ]);
     }
     public function update_cartmodel(Request $request) {
-        dd($request->all());
         $cart_item_id = $request->cart_item_id;
         $quantity = $request->quantity;
         $cart_item = CartItem::find($cart_item_id);

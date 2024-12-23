@@ -47,8 +47,6 @@ class ReservationHandle extends Controller
                 'res_status' => $request->reservation_status,
                 'user_id' => $request->user_id,
             ]);
-            // Session::put('reservation_id', $reservation->res_id);
-            // $res_id =  Session::get('reservation_id');
             $res_id = $reservation->res_id;
             $user = User::find($reservation->user_id);
             //Create a cart in database
@@ -80,6 +78,7 @@ class ReservationHandle extends Controller
         }
     }
     public function show_list_reservations($type_user) {
+        Session::put('type_user', $type_user);
         $list_reservations = Reservation::with(['getUser', 'hasCart'])->paginate(10);
         return view('admin.list_reservations')->with('list_reservations', $list_reservations)->with('type_user', $type_user);
     }
@@ -170,7 +169,7 @@ class ReservationHandle extends Controller
         $dish_id = $request->dishid_hidden;
         $quantity =  $request->quantity;
         $dish = Dish::with('get_category')->find($dish_id);
-        CartItem::create([
+        $cart_item = CartItem::create([
             'cart_item_name' => $dish->dish_name,
             'cart_item_category' => $dish->get_category->category_name,
             'cart_item_img' => $dish->dish_img,
@@ -180,7 +179,7 @@ class ReservationHandle extends Controller
             'dish_id' => $dish->dish_id,  
         ]);
         $type_user = $request->type_name;
-        return Redirect::to("/cart-items/$cart_id?type_user=".$type_user)->with('type_user', $type_user);
+        return Redirect::to("/cart-items/$cart_id?type_name=".$type_user)->with('type_user', $type_user);
     }
     public function delete_cart_item(Request $request, $cart_id) {
         dd($request->cart_item_id);

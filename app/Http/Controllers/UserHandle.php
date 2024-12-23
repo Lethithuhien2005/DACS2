@@ -60,7 +60,7 @@ class UserHandle extends Controller
             if($check_password) {
                 Session::put('account_name', $result->account_name);
                 Session::put('user_id', $result->user_id);
-                Session::put('type_user', $result->get_type->type_name);
+                Session::put('type_user', $type_user);
                 $remember_token = Str::random(60);
                 $result->remember_token = $remember_token;
                 $result->save();

@@ -189,67 +189,6 @@
             @endforeach
            </div>
           @endif
-          <!-- <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/spaghetti bolognese.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">spaghetti bolognese</h4>
-              <div class="card-price">
-                <p>89.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/French steak.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">French steak</h4>
-              <div class="card-price">
-                <p>239.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/Pumpkin Shrimp Soup.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">pumpkin soup</h4>
-              <div class="card-price">
-                <p>85.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/shrimp.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">golden sauce shrimp</h4>
-              <div class="card-price">
-                <p>179.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/shushi 2.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">kimpap</h4>
-              <div class="card-price">
-                <p>219.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="card" onclick="location.href='{{URL::to('/detail_food')}}'">
-            <img class="card-img-top" src="{{asset('public/fontend/img/pizza.jpg')}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-              <h4 class="card-title">pizza</h4>
-              <div class="card-price">
-                <p>150.000<span>đ</span></p>
-                <button onclick="location.href='{{URL::to('/shopcart')}}'"><i class="fa-solid fa-cart-shopping"></i></button>
-              </div>
-            </div>
-          </div> -->
-        <!-- </div> -->
      </div>
     <!-- Discount -->
      <div class="discount-container" data-aos="fade-right">

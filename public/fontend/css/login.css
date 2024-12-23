@@ -74,7 +74,7 @@ main {
     width: 100%;
     font-weight: bold;
     background: linear-gradient(45deg, #f1f10a, #f1f10a 100%);
-    color: white;
+    color: #000;
     padding-block: 15px;
     margin: 20px auto;
     border-radius: 20px;
