@@ -109,14 +109,17 @@ class UserHandle extends Controller
     public function update_user($user_id, Request $request) {
         $check_email = User::where('email', $request->email)->where('user_id', '!=', $user_id)->exists();
         $check_account = User::where('account_name', $request->account_name)->where('user_id', '!=', $user_id)->exists();
+        $user = User::find($user_id);
         if($check_email) {
             Session::put('message', "The email already exists!!!");
-            return Redirect::to('/update-user-information'.$user->user_id);
+            return Redirect::to("/profile/$user_id");
+
         }
         else {
             if($check_account) {
                 Session::put('message', "The account name already exists!!!");
-                return Redirect::to('/update-user-information'.$user->user_id);
+                return Redirect::to("/profile/$user_id");
+
             }
             else {
                 $user = User::find($user_id);

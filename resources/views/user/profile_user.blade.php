@@ -1,17 +1,26 @@
 @extends('user.account_layout')
+@section('style')
+<style>
+        .message {
+            color: #3366cc;
+        }
+</style>
+@endsection
 @section('user_content')
-<?php
-    $message = Session::get('message');
-    if ($message) {
-        echo $message;
-    }
-    Session::put('message', null);
-?>
     <div class="right-container">
         <div class="row right-header">
             <h4>My profile</h4>
             <p>Account security information management</p>
         </div>
+        <span class="message">
+                <?php
+                    $message = Session::get('message');
+                    if($message) {
+                        echo $message;
+                    }
+                    Session::put('message', null);
+                ?>
+            </span>
         <div class="right-user-content">
             <div class="row profile-container">
                 <form class="col-sm-9 form-information" action="{{URL::to('update-user-information/'.$user_id)}}" method="post">
