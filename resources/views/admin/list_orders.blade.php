@@ -23,14 +23,28 @@
       font-size: 13px;
       padding: 4px 10px;
     }
+    .search-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .input-group {
+      margin-right: 50px;
+    }
   </style>
 @endsection
 @section('admin_content')
 <div class="table-agile-info">
   <div class="panel panel-default">
-    <div class="panel-heading">
-      List of Orders
-    </div>
+    @if(!isset($find_orders))
+        <div class="panel-heading">
+        List of Orders
+        </div>
+      @else
+          <div class="panel-heading">
+          Search results
+          </div>
+      @endif
     <div class="row w3-res-tb">
       <div class="col-sm-5 m-b-xs">
       </div>
@@ -38,10 +52,13 @@
       </div>
       <div class="col-sm-3">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="Search">
-          <span class="input-group-btn">
-            <button class="btn btn-sm btn-default" type="button">Go!</button>
-          </span>
+        <form action="{{URL::to('/search-order/'.$type_user)}}" method="post" class="search-form">
+            {{ csrf_field() }}
+            <input type="text" name="search_order" class="input-sm form-control" placeholder="Search">
+            <span class="input-group-btn">
+              <button class="btn btn-sm btn-default" name="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </span>
+          </form>
         </div>
       </div>
     </div>
@@ -73,33 +90,62 @@
 
           </tr>
         </thead>
+          @if(!isset($find_orders))
+          <tbody>
+            @foreach($list_orders as $key => $order)
+            <tr>
+              <td class="short-content"><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+              <td class="short-content">{{ $order->getUser->account_name }}</td>
+              <td class="short-content">{{$order->getReservation->name  }}</td>
+              <td class="short-content">{{$order->getReservation->phone  }}</td>
+              <td class="short-content">{{ $order->getReservation->res_date }}</td>
+              <td class="short-content">{{ $order->getReservation->res_time }}</td>
+              <td class="short-content">{{ $order->getReservation->number_of_people }}</td>
+              <td class="short-content">
+                <a href="{{URL::to('/order-items/'.$order->order_id . '?type_name='.$type_user)}}"><i class="fa-solid fa-cart-shopping"></i></a></td>
+              <td>{{ number_format($order->total_payment, 0, ',', '.') }}<span>đ</span></td>
+              <td class="short-content"><span class="text-ellipsis status_container">
+                      @if($order->order_status == "unpaid" )
+                          <a href="{{URL::to('/paid/'.$order->order_id)}} "><span><p class="res_status">{{ $order->order_status }}</p></span></a>
+                      @else
+                      <a href=  "{{URL::to('/unpaid/'.$order->order_id)}}"><span><p class="res_status">{{ $order->order_status }}</p></span>
+                      @endif
+                    </span>
+              </td>
+            </tr>
+              @endforeach
+          </tbody>
+        @else
         <tbody>
-          @foreach($list_orders as $key => $order)
-          <tr>
-            <td class="short-content"><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-            <td class="short-content">{{ $order->getUser->account_name }}</td>
-            <td class="short-content">{{$order->getReservation->name  }}</td>
-            <td class="short-content">{{$order->getReservation->phone  }}</td>
-            <td class="short-content">{{ $order->getReservation->res_date }}</td>
-            <td class="short-content">{{ $order->getReservation->res_time }}</td>
-            <td class="short-content">{{ $order->getReservation->number_of_people }}</td>
-            <td class="short-content">
-              <a href="{{URL::to('/order-items/'.$order->order_id . '?type_name='.$type_user)}}"><i class="fa-solid fa-cart-shopping"></i></a></td>
-            <td>{{ number_format($order->total_payment, 0, ',', '.') }}<span>đ</span></td>
-            <td class="short-content"><span class="text-ellipsis status_container">
-                    @if($order->order_status == "unpaid" )
-                        <a href="{{URL::to('/paid/'.$order->order_id)}} "><span><p class="res_status">{{ $order->order_status }}</p></span></a>
-                    @else
-                    <a href=  "{{URL::to('/unpaid/'.$order->order_id)}}"><span><p class="res_status">{{ $order->order_status }}</p></span>
-                    @endif
-                  </span>
-            </td>
-          </tr>
-            @endforeach
-        </tbody>
+            @foreach($find_orders as $key => $find_order)
+            <tr>
+              <td class="short-content"><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+              <td class="short-content">{{ $find_order->getUser->account_name }}</td>
+              <td class="short-content">{{$find_order->getReservation->name  }}</td>
+              <td class="short-content">{{$find_order->getReservation->phone  }}</td>
+              <td class="short-content">{{ $find_order->getReservation->res_date }}</td>
+              <td class="short-content">{{ $find_order->getReservation->res_time }}</td>
+              <td class="short-content">{{ $find_order->getReservation->number_of_people }}</td>
+              <td class="short-content">
+                <a href="{{URL::to('/order-items/'.$find_order->order_id . '?type_name='.$type_user)}}"><i class="fa-solid fa-cart-shopping"></i></a></td>
+              <td>{{ number_format($find_order->total_payment, 0, ',', '.') }}<span>đ</span></td>
+              <td class="short-content"><span class="text-ellipsis status_container">
+                      @if($find_order->order_status == "unpaid" )
+                          <a href="{{URL::to('/paid/'.$find_order->order_id)}} "><span><p class="res_status">{{ $find_order->order_status }}</p></span></a>
+                      @else
+                      <a href=  "{{URL::to('/unpaid/'.$find_order->order_id)}}"><span><p class="res_status">{{ $find_order->order_status }}</p></span>
+                      @endif
+                    </span>
+              </td>
+            </tr>
+              @endforeach
+          </tbody>
+        @endif
       </table>
     </div>
+    @if(!isset($find_orders))
     {{$list_orders->links()}}
+    @endif
   </div>
 </div>
 @endsection

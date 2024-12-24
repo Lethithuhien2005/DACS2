@@ -137,4 +137,18 @@ class UserHandle extends Controller
             }
         }
     }
+    public function search(Request $request){
+        $key_word = $request->search_user;
+        $find_users = User::join('type_users', 'users.type_id', '=', 'type_users.type_id')
+                            ->where('users.name', 'like', '%' . $key_word . '%')
+                            ->orWhere('users.account_name', 'like', '%' .$key_word . '%')
+                            ->orWhere('users.gender', 'like', '%' .$key_word . '%')
+                            ->orWhere('users.email', 'like', '%' .$key_word . '%')
+                            ->orWhere('users.phone', 'like', '%' .$key_word . '%')
+                            ->orWhere('users.address', 'like', '%' .$key_word . '%')
+                            ->orWhere('users.date_of_birth', 'like', '%' .$key_word . '%')
+                            ->orWhere('type_users.type_name', 'like', '%' .$key_word . '%')
+                            ->get();
+        return view('admin.list_users')->with('find_users', $find_users);
+    }
 }

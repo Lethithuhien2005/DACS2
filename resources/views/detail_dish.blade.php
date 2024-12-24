@@ -141,9 +141,9 @@
                                                     <i class="fa-solid fa-calendar-days"></i>
                                                     <?php
                                                         $fb_date = $item->getFeedback->fb_date;
-                                                        $fb_date = date('d-m-Y');
+                                                        $formatted_date = date('d-m-Y', strtotime($fb_date));
                                                     ?>
-                                                    <p>{{ $fb_date }}</p>
+                                                    <p>{{ $formatted_date }}</p>
                                                 </div>
                                             </div>
                                         </div>

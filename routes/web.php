@@ -28,8 +28,9 @@ Route::get('/delete_item_cart_res_id/{cart_id}', [ReservationHandle::class, 'del
 Route::get('/delete_item_cart_res_id/{cart_id}', [ReservationHandle::class, 'delete_cart_item']);
 Route::get('/my-reservation/{user_id}', [ReservationHandle::class, 'show_my_reservation']);
 Route::get('/edit-reservation/{res_id}', [ReservationHandle::class, 'edit_reservation']);
-Route::post('/update_reservation/{res_id}', [ReservationHandle::class, 'update_reservation']);
+Route::post('/update-reservation/{res_id}', [ReservationHandle::class, 'update_reservation']);
 Route::get('/cancel-reservation/{res_id}', [ReservationHandle::class, 'show_status_cancel']);
+Route::post('/search-reservation/{type_user}', [ReservationHandle::class, 'search']);
 
 
 use App\Http\Controllers\UserHandle;
@@ -41,6 +42,7 @@ Route::post('/log-up', [UserHandle::class, 'save_user']);
 Route::get('/logout', [UserHandle::class, 'logout']);
 Route::get('/profile/{user_id}', [UserHandle::class, 'showProfile']);
 Route::post('/update-user-information/{user_id}', [UserHandle::class, 'update_user']);
+Route::post('/search-user', [UserHandle::class, 'search']);
 
 use App\Http\Controllers\AdminHandle;
 Route::get('/dashboard/{type_user}', [AdminHandle::class, 'showDashboard']);
@@ -59,6 +61,7 @@ Route::get('/list-of-category', [CategoryHandle::class, 'display_list']);
 Route::get('/edit_category/{category_id}', [CategoryHandle::class, 'edit_category']);
 Route::post('/update_category/{category_id}', [CategoryHandle::class, 'update_category']);
 Route::get('/delete_category/{category_id}', [CategoryHandle::class, 'delete_category']);
+Route::post('/search-category', [CategoryHandle::class, 'search']);
 
 use App\Http\Controllers\DishHandle;
 Route::get('/add-dish', [DishHandle::class, 'add_dish']);
@@ -71,6 +74,7 @@ Route::post('/update_dish/{dish_id}', [DishHandle::class, 'update_dish']);
 Route::get('/delete_dish/{dish_id}', [DishHandle::class, 'delete_dish']);
 Route::get('/detail_dish/{dish_id}', [DishHandle::class, 'show_detail_dish']);
 Route::get('/detail_dish_cart_id/{dish_id}', [DishHandle::class, 'show_detail_dish_cart_id']);
+Route::post('/search-dish', [DishHandle::class, 'search']);
 
 use App\Http\Controllers\CartHandle;
 Route::post('/add-to-cart', [CartHandle::class, 'add_to_cart']);
@@ -84,11 +88,13 @@ Route::get('list-of-orders/{type_user}', [OrderHandle::class, 'show_list_order']
 Route::get('/order-items/{order_id}', [OrderHandle::class, 'show_order_item']);
 Route::get('/paid/{order_id}', [OrderHandle::class, 'convert_to_paid']);
 Route::get('/unpaid/{order_id}', [OrderHandle::class, 'convert_to_unpaid']);
+Route::post('/search-order/{type_user}', [OrderHandle::class, 'search']);
 
 
 use App\Http\Controllers\FeedbackHandle;
 Route::post('/send-feedback/{order_item_id}', [FeedbackHandle::class, 'send_feedback']);
 Route::get('/list-of-feedbacks', [FeedbackHandle::class, 'show_list_feedback']);
+Route::post('/search-feedback', [FeedbackHandle::class, 'search']);
 
 use App\Http\Controllers\ContactHandle;
 Route::post('/send-contact', [ContactHandle::class, 'save_contact']);

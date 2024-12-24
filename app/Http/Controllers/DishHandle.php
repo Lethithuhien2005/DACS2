@@ -53,14 +53,14 @@ class DishHandle extends Controller
     }
     public function hidden($dish_id) {
         $data = Dish::find($dish_id);
-        $data->dish_status = 0;
+        $data->dish_status = "sold out";
         $data->save();
         Session::put('message', 'Hidden the dish successfully!');
         return Redirect::to('/list-of-dishes');
     }
     public function display($dish_id) {
         $data = Dish::find($dish_id);
-        $data->dish_status = 1;
+        $data->dish_status = "still available";
         $data->save();
         Session::put('message', 'Hidden the dish successfully!');
         return Redirect::to('/list-of-dishes');
@@ -117,5 +117,15 @@ class DishHandle extends Controller
         $category_dish = $detail_dish->category_id;
         $related_dish = Dish::with('get_category')->where('category_id', $category_dish)->where('dish_id', '!=', $dish_id)->get();
         return view('detail_dish')->with('category_dish', $category_dish)->with('detail_dish', $detail_dish)->with('related_dish',$related_dish);
+    }
+    public function search(Request $request) {
+        $key_word = $request->search_dish;
+        $find_dishes = Dish::join('categories', 'dishes.category_id', '=', 'categories.category_id')
+                        ->select('dishes.*', 'categories.category_name')
+                        ->where('dish_name', 'like', '%'.$key_word.'%')
+                        ->orWhere('dish_price', 'like', '%'.$key_word.'%')
+                        ->orWhere('category_name', 'like', '%'.$key_word.'%')
+                        ->orWhere('dish_status', 'like', '%'.$key_word.'%')->get();
+        return view('admin.list_dishes')->with('find_dishes', $find_dishes);
     }
 }

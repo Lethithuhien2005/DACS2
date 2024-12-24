@@ -43,4 +43,20 @@ class OrderHandle extends Controller
         $type_user = $order->getUser->get_type->type_name;
         return Redirect::to('/list-of-orders/'.$type_user);
     }
+    public function search($type_user, Request $request) {
+        $key_word = $request->search_order;
+        $find_orders = Order::join('users', 'orders.user_id', '=', 'users.user_id')
+                            ->join('order_items', 'orders.order_id', '=', 'order_items.order_id')
+                            ->join('reservations', 'reservations.res_id', '=', 'orders.res_id')
+                            ->select('orders.order_status', 'order_items.*', 'users.account_name', 'reservations.*')
+                            ->where('users.account_name', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.name', 'like', '%'.$key_word.'%') 
+                            ->orWhere('reservations.phone', 'like', '%'.$key_word.'%') 
+                            ->orWhere('reservations.res_date', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.res_time', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.number_of_people', 'like', '%'.$key_word.'%') 
+                            ->orWhere('orders.order_status', 'like', '%'.$key_word.'%')  
+                            ->get();
+        return view('admin.list_orders')->with('find_orders', $find_orders)->with('type_user', $type_user);
+    }
 }

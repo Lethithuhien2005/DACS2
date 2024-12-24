@@ -58,4 +58,10 @@ class CategoryHandle extends Controller
         Session::put('message', 'Deleted a category successfully!');
         return Redirect::to('/list-of-category');
     }
+    public function search(Request $request){
+        $key_word = $request->search_category;
+        $find_categories = Category::where('category_name', 'like', '%' . $key_word . '%')
+                            ->orWhere('category_desc', 'like', '%' .$key_word . '%')->get();
+        return view('admin.list_category')->with('find_categories', $find_categories);
+    }
 }

@@ -50,7 +50,7 @@
                     Session::put('message', null);
                 ?>
             </span>
-                <form class="form-information" action="{{URL::to('update-reservation/'.$reservation_editing->res_id)}}" method="post">
+                <form class="form-information" action="{{URL::to('update-reservation/'.$reservation_editing->res_id . '?type_name='.$type_user)}}" method="post">
                     {{ csrf_field() }}
                     <div class="row user-information">
                         <div class="col-sm-2">

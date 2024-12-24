@@ -49,8 +49,8 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Dish's Status</label>
                                     <select name="dish_status" class="form-control input-sm m-bot15">
-                                        <option value="1">Still Available</option>
-                                        <option value="0">Sold Out</option>
+                                        <option value="still available">Still Available</option>
+                                        <option value="sold out">Sold Out</option>
                                     </select>
                                 </div>
                                 <button type="submit" name="add_dish" class="btn btn-info">Add</button>

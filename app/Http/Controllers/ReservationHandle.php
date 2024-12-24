@@ -120,9 +120,10 @@ class ReservationHandle extends Controller
         Session::put('message', 'The customer has completed the meal');
         return Redirect::to('/list-of-reservations/'. $type_user);
     }
-    public function edit_reservation($res_id) {
+    public function edit_reservation($res_id, Request $request) {
+        $type_user = $request->type_name;
         $reservation_editing = Reservation::find($res_id);
-        return view('admin.edit_reservation')->with('reservation_editing', $reservation_editing);
+        return view('admin.edit_reservation')->with('reservation_editing', $reservation_editing)->with('type_user', $type_user);
     }
     public function update_reservation($res_id, Request $request) {
         $reservation = Reservation::find($res_id);
@@ -135,10 +136,11 @@ class ReservationHandle extends Controller
         $reservation->note = $request->note;
         $reservation->save();
         $user = User::find($reservation->user_id);
-        $type_user = ["administrator", "manager", "staff"];
+        $list_reservations = Reservation::with(['getUser', 'hasCart'])->paginate(10);
+        $type_user = $request->type_name;
         Session::put('message', 'Updated reservation successfully!');
         $this->mailHandler->sendUpdatingReservation($reservation, $user);
-        return view('admin.list_reservation')->with('type_user', $type_user);
+        return view('admin.list_reservations')->with('type_user', $type_user)->with('list_reservations', $list_reservations);
 
     }
     public function show_status_cancel($res_id, Request $request) {
@@ -202,4 +204,20 @@ class ReservationHandle extends Controller
         $list_reservations = Reservation::where('user_id', $user_id)->get();
         return view('user.my_reservation')->with('list_reservations', $list_reservations)->with('account_name', $user->account_name);
     }
+    public function search($type_user, Request $request) {
+        $key_word = $request->search_reservation;
+        $find_reservations = Reservation::join('users', 'reservations.user_id', '=', 'users.user_id')
+                            ->select('reservations.*', 'users.account_name')
+                            ->where('users.account_name', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.name', 'like', '%'.$key_word.'%')  // Cột name từ bảng reservations
+                            ->orWhere('reservations.email', 'like', '%'.$key_word.'%')  // Cột email từ bảng reservations
+                            ->orWhere('reservations.phone', 'like', '%'.$key_word.'%')  // Cột phone từ bảng reservations
+                            ->orWhere('reservations.res_date', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.res_time', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.number_of_people', 'like', '%'.$key_word.'%')
+                            ->orWhere('reservations.res_status', 'like', '%'.$key_word.'%')
+                            ->get();
+        return view('admin.list_reservations')->with('find_reservations', $find_reservations)->with('type_user', $type_user);
+    }
+    
 }
